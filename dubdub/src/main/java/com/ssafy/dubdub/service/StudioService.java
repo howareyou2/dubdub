@@ -1,14 +1,16 @@
 package com.ssafy.dubdub.service;
 
 import io.openvidu.java.client.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class StudioService {
 
     private final OpenVidu openVidu;
