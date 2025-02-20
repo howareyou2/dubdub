@@ -2,7 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  setHeroLoaded: (loaded: boolean) => void;
+}
+
+const HeroSection = ({ setHeroLoaded }: HeroSectionProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -67,6 +71,9 @@ const HeroSection = () => {
         };
 
         drawParticles();
+
+        // ✅ 애니메이션이 시작된 후 HeroSection이 로딩되었음을 알림
+        setTimeout(() => setHeroLoaded(true), 500);
       });
     }
 
@@ -77,7 +84,9 @@ const HeroSection = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="h-full w-full" />;
+  return (
+    <canvas ref={canvasRef} className="absolute left-0 top-0 h-full w-full" />
+  );
 };
 
 export default HeroSection;
